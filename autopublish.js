@@ -1,8 +1,47 @@
 import { get } from 'lodash';
+import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
 
 if (Meteor.isClient){
   console.log('Autosubscribing to publications.')
+
+
   Meteor.startup(function() {
+
+    AllergyIntolerances = new Mongo.Collection(null);
+    AuditEvents = new Mongo.Collection(null);
+    Conditions = new Mongo.Collection(null);
+    CarePlans = new Mongo.Collection(null);
+    Consents = new Mongo.Collection(null);
+    Contracts = new Mongo.Collection(null);
+    Communications = new Mongo.Collection(null);
+    Devices = new Mongo.Collection(null);
+    DiagnosticReports = new Mongo.Collection(null);
+    Endpoints = new Mongo.Collection(null);
+    Encounters = new Mongo.Collection(null);
+    FamilyMemberHistories = new Mongo.Collection(null);
+    HealthcareServices = new Mongo.Collection(null);
+    ImagingStudies = new Mongo.Collection(null);
+    Immunizations = new Mongo.Collection(null);
+    Lists = new Mongo.Collection(null);
+    Locations = new Mongo.Collection(null);
+    Medications = new Mongo.Collection(null);
+    MedicationOrders = new Mongo.Collection(null);
+    MedicationStatements = new Mongo.Collection(null);
+    Observations = new Mongo.Collection(null);
+    Organizations = new Mongo.Collection(null);
+    Patients = new Mongo.Collection(null);
+    Persons = new Mongo.Collection(null);
+    Practitioners = new Mongo.Collection(null);
+    Questionnaires = new Mongo.Collection(null);
+    QuestionnaireResponses = new Mongo.Collection(null);
+    RiskAssessments = new Mongo.Collection(null);
+    RelatedPersons = new Mongo.Collection(null);
+    PractitionerRoles = new Mongo.Collection(null);
+    Procedures = new Mongo.Collection(null);
+    Questionnaires = new Mongo.Collection(null);
+    QuestionnaireResponses = new Mongo.Collection(null);
+    Subscriptions = new Mongo.Collection(null);
 
     // if(Package['clinical:hl7-resource-allergy-intolerance']){
     //   Meteor.subscribe("AllergyIntolerances", {});
@@ -40,6 +79,8 @@ if (Meteor.isClient){
     // if(Package['clinical:hl7-resource-family-member-history']){
     //   Meteor.subscribe("FamilyMemberHistories", {});
     // }
+
+
     // if(Package['clinical:hl7-resource-healthcare-service']){
     //   Meteor.subscribe("HealthcareServices", {});
     // }

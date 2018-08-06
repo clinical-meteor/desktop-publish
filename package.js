@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:desktop-publish',
-  version: '2.0.1',
+  version: '2.0.2',
   summary: 'Desktop publication rules for FHIR resources and logged in users (i.e. clinicians)',
   git: 'https://github.com/clinical-meteor/desktop-publish',
   documentation: 'README.md'

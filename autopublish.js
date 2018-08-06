@@ -20,6 +20,7 @@ if (Meteor.isClient){
     Endpoints = new Mongo.Collection(null);
     Encounters = new Mongo.Collection(null);
     FamilyMemberHistories = new Mongo.Collection(null);
+    Goals = new Mongo.Collection(null);
     HealthcareServices = new Mongo.Collection(null);
     ImagingStudies = new Mongo.Collection(null);
     Immunizations = new Mongo.Collection(null);

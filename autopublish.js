@@ -9,7 +9,6 @@ if (Meteor.isClient){
   Meteor.startup(function() {
 
     AllergyIntolerances = new Mongo.Collection(null);
-    AuditEvents = new Mongo.Collection(null);
     Conditions = new Mongo.Collection(null);
     CarePlans = new Mongo.Collection(null);
     Consents = new Mongo.Collection(null);
@@ -47,9 +46,9 @@ if (Meteor.isClient){
     // if(Package['clinical:hl7-resource-allergy-intolerance']){
     //   Meteor.subscribe("AllergyIntolerances", {});
     // }
-    // if(Package['clinical:hl7-resource-audit-event']){
-    //   Meteor.subscribe("AuditEvents", {});
-    // }
+    if(Package['clinical:hl7-resource-audit-event']){
+      Meteor.subscribe("AuditEvents", {});
+    }
     // if(Package['clinical:hl7-resource-condition']){
     //   Meteor.subscribe("Conditions", {});
     // }
@@ -159,10 +158,10 @@ if (Meteor.isClient){
 
 
 
-// if (Meteor.isServer){
-//   console.log('Autopublishing loaded FHIR resources.')
+if (Meteor.isServer){
+  console.log('Autopublishing loaded FHIR resources.')
 
-//   Meteor.startup(function() {
+  Meteor.startup(function() {
 //     if(Package['clinical:hl7-resource-allergy-intolerance']){
 //       Meteor.publish("AllergyIntolerances", function (query){
 //         check(query, Match.Maybe(Object))
@@ -180,23 +179,23 @@ if (Meteor.isClient){
 //         }
 //       });
 //     }   
-//     if(Package['clinical:hl7-resource-audit-event']){
-//       Meteor.publish("AuditEvents", function (query){
-//         check(query, Match.Maybe(Object))
-//         if(get(Meteor, 'settings.public.defaults.requireAuthorization')){
-//           if (this.userId) {
-//             Meteor.call('createSubscription', "AuditEvents", query, {})
-//             return AuditEvents.find(query);
-//           } else {
-//             Meteor.call('removeSubscription', "AuditEvents")
-//             return [];
-//           }  
-//         } else {
-//           Meteor.call('createSubscription', "AuditEvents", query, {})
-//           return AuditEvents.find(query);
-//         }
-//       });
-//     }
+    // if(Package['clinical:hl7-resource-audit-event']){
+      Meteor.publish("AuditEvents", function (query){
+        check(query, Match.Maybe(Object))
+        if(get(Meteor, 'settings.public.defaults.requireAuthorization')){
+          if (this.userId) {
+            Meteor.call('createSubscription', "AuditEvents", query, {})
+            return AuditEvents.find(query);
+          } else {
+            Meteor.call('removeSubscription', "AuditEvents")
+            return [];
+          }  
+        } else {
+          Meteor.call('createSubscription', "AuditEvents", query, {})
+          return AuditEvents.find(query);
+        }
+      });
+    // }
 //     if(Package['clinical:hl7-resource-careplan']){
 //       Meteor.publish("CarePlans", function (query){
 //         check(query, Match.Maybe(Object))
@@ -806,7 +805,7 @@ if (Meteor.isClient){
 //         return QuestionnaireResponses.find(query);
 //       }      
 //     });
-//   }      
+  }); 
 
 
   
@@ -821,7 +820,7 @@ if (Meteor.isClient){
 //     });
 //   }      
 
-// }
+}
 
 
 

@@ -2,6 +2,9 @@ import { get } from 'lodash';
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
+
+
+
 if (Meteor.isClient){
   console.log('Autosubscribing to publications.')
 
@@ -11,7 +14,7 @@ if (Meteor.isClient){
     AllergyIntolerances = new Mongo.Collection(null);
     Conditions = new Mongo.Collection(null);
     CarePlans = new Mongo.Collection(null);
-    Consents = new Mongo.Collection(null);
+    // Consents = new Mongo.Collection(null);
     Contracts = new Mongo.Collection(null);
     Communications = new Mongo.Collection(null);
     Devices = new Mongo.Collection(null);
@@ -43,6 +46,8 @@ if (Meteor.isClient){
     QuestionnaireResponses = new Mongo.Collection(null);
     Subscriptions = new Mongo.Collection(null);
 
+
+
     // if(Package['clinical:hl7-resource-allergy-intolerance']){
     //   Meteor.subscribe("AllergyIntolerances", {});
     // }
@@ -55,9 +60,9 @@ if (Meteor.isClient){
     // if(Package['clinical:hl7-resource-careplan']){
     //   Meteor.subscribe("CarePlans", {});
     // }
-    // if(Package['clinical:hl7-resource-consent']){
-    //   Meteor.subscribe("Consents", {});
-    // }
+    if(Package['clinical:hl7-resource-consent']){
+      Meteor.subscribe("Consents", {});
+    }
     // if(Package['clinical:hl7-resource-contract']){
     //   Meteor.subscribe("Contracts", {});
     // }     
@@ -256,23 +261,23 @@ if (Meteor.isServer){
 //         }
 //       });
 //     }         
-//     if(Package['clinical:hl7-resource-consent']){
-//       Meteor.publish("Consents", function (query){
-//         check(query, Match.Maybe(Object))
-//         if(get(Meteor, 'settings.public.defaults.requireAuthorization')){
-//           if (this.userId) {
-//             Meteor.call('createSubscription', "Consents", query, {})
-//             return Consents.find(query);
-//           } else {
-//             Meteor.call('removeSubscription', "Consents")
-//             return [];
-//           }  
-//         } else {
-//           Meteor.call('createSubscription', "Consents", query, {})
-//           return Consents.find(query);
-//         }
-//       });
-//     }     
+    if(Package['clinical:hl7-resource-consent']){
+      Meteor.publish("Consents", function (query){
+        check(query, Match.Maybe(Object))
+        if(get(Meteor, 'settings.public.defaults.requireAuthorization')){
+          if (this.userId) {
+            Meteor.call('createSubscription', "Consents", query, {})
+            return Consents.find(query);
+          } else {
+            Meteor.call('removeSubscription', "Consents")
+            return [];
+          }  
+        } else {
+          Meteor.call('createSubscription', "Consents", query, {})
+          return Consents.find(query);
+        }
+      });
+    }     
 //     if(Package['clinical:hl7-resource-contract']){
 //       Meteor.publish("Contracts", function (query){
 //         check(query, Match.Maybe(Object))

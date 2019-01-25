@@ -6,10 +6,10 @@ import { Meteor } from 'meteor/meteor';
 
 
 if (Meteor.isClient){
-  console.log('Autosubscribing to publications.')
-
+  console.log('Autosubscribing to server data streams.')
 
   Meteor.startup(function() {
+    console.log('Turning off FHIR channels that contain Protected Health Information...')
 
     AllergyIntolerances = new Mongo.Collection(null);
     Conditions = new Mongo.Collection(null);
@@ -47,11 +47,13 @@ if (Meteor.isClient){
     Subscriptions = new Mongo.Collection(null);
 
 
+    console.log('Turning on administrative FHIR channels...')
 
     // if(Package['clinical:hl7-resource-allergy-intolerance']){
     //   Meteor.subscribe("AllergyIntolerances", {});
     // }
     if(Package['clinical:hl7-resource-audit-event']){
+      console.log('AuditEvents - subscribed')
       Meteor.subscribe("AuditEvents", {});
     }
     // if(Package['clinical:hl7-resource-condition']){
@@ -61,6 +63,7 @@ if (Meteor.isClient){
     //   Meteor.subscribe("CarePlans", {});
     // }
     if(Package['clinical:hl7-resource-consent']){
+      console.log('Consents - subscribed')
       Meteor.subscribe("Consents", {});
     }
     // if(Package['clinical:hl7-resource-contract']){
